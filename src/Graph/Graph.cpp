@@ -28,4 +28,8 @@ namespace KVA {
     int &Graph::operator()(int _i, int _j) {
         return this->matrix[_i][_j];
     }
+
+    void Graph::setMatrix(int _n) {
+        this->matrix_size = _n;
+    }
 } // KVA

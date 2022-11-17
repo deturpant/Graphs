@@ -14,7 +14,7 @@ namespace KVA {
         Graph();
         Graph(int _n);
         int &operator() (int _i, int _j);
-        void setMatrix();
+        void setMatrix(int _n);
         void ShowMatrix();
     };
 
