@@ -24,4 +24,8 @@ namespace KVA {
             }
         }
     }
+
+    int &Graph::operator()(int _i, int _j) {
+        return this->matrix[_i][_j];
+    }
 } // KVA
