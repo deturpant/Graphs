@@ -33,7 +33,7 @@ namespace KVA {
         void addVertex(int _countSV, int *arrVert); // добавление вершины
         void deleteVertex(int _number); // удаление вершины по номеру
         int getSumDegree(); // получить сумму степеней вершин
-        int getCountEdge();
+        int getCountEdge(); // геттер на кол-во рёбер
     };
 
 } // KVA

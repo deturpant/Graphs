@@ -43,6 +43,7 @@ namespace KVA {
     void Graph::ShowMatrix() {
         std::cout << "Матрица смежности:\n";
         for (int i = 0; i < matrix_size; i++) {
+            cout << "[" << i+1 << "] ";
             for (int j = 0; j < matrix_size; j++) {
                 std::cout << " " << matrix[i][j] << " ";
             }

@@ -24,7 +24,60 @@ void ReadGraphFromFile(any &param) {
     }
     in.close();
 }
-
+void addVert(any &param) {
+    auto *graph = std::any_cast<Graph *>(param);
+    cout << "Введите кол-во вершин, с которыми будет связана новая вершина --> ";
+    int counter;
+    cin >>counter;
+    int *arr = new int[counter];
+    int temp;
+    for (int i = 0; i< counter;i++) {
+        cout << "Введите вершину №" << i+1 << " -->";
+        cin >> temp;
+        arr[i] = temp;
+    }
+    graph->addVertex(counter, arr);
+    cout << "\nВершина и соответствующие связи установлены!\n";
+}
+void deleteVert(any &param) {
+    auto *graph = std::any_cast<Graph *>(param);
+    graph->ShowMatrix();
+    cout << "Введите индекс удаляемой вершины по матрице смежностей --> ";
+    int tmp;
+    cin >> tmp;
+    graph->deleteVertex(tmp-1);
+    cout << "Удаление успешно завершено!\n";
+}
+void printBFS(any &param) {
+    auto *graph = std::any_cast<Graph *>(param);
+    cout << "Запущена функция обхода графа в ширину...\n";
+    graph->BFS();
+}
+void printDFS(any &param) {
+    auto *graph = std::any_cast<Graph *>(param);
+    cout << "Запущена функция обхода графа в глубину...\n";
+    graph->DFS();
+}
+void printMatrix(any &param) {
+    auto *graph = std::any_cast<Graph *>(param);
+    cout << "Запущена функция вывода матрицы смежности...\n";
+    graph->ShowMatrix();
+}
+void printG(any &param) {
+    auto *graph = std::any_cast<Graph *>(param);
+    cout << "Запущена функция вывода перемещений между вершинами...\n";
+    graph->printGraph();
+}
+void printCountEdge(any &param) {
+    auto *graph = std::any_cast<Graph *>(param);
+    cout << "Запущена функция вывода кол-ва рёбер...\n";
+    cout << "Результат ==> " << graph->getCountEdge() << " рёбер.";
+}
+void printSumDegree(any &param) {
+    auto *graph = std::any_cast<Graph *>(param);
+    cout << "Запущена функция вывода суммы степеней вершин...\n";
+    cout << "Результат ==> " << graph->getSumDegree();
+}
 void print(any &param) {
     auto *graph = std::any_cast<Graph *>(param);
     graph->ShowMatrix();
