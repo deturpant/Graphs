@@ -9,7 +9,9 @@
 namespace KVA {
     Graph::Graph() {
         this->matrix_size = 7;
+        nodes = new int[matrix_size];
         for (int i = 0; i < this->matrix_size; i++) {
+            nodes[i] = 0;
             for (int j = 0; j < this->matrix_size; j++) {
                 this->matrix[i][j] = 0;
                 this->matrix[j][i] = this->matrix[i][j];
@@ -19,6 +21,7 @@ namespace KVA {
 
     Graph::Graph(int _n) {
         this->matrix_size = _n;
+        nodes = new int[matrix_size];
         for (int i = 0; i < this->matrix_size; i++) {
             for (int j = 0; j < this->matrix_size; j++) {
                 this->matrix[i][j] = 0;
@@ -43,6 +46,66 @@ namespace KVA {
             }
             std::cout << std::endl;
         }
+    }
+
+    void Graph::DFS() {
+        cout << "----------DFS----------------\n";
+        Stack.push(0);
+        while(!Stack.empty()) {
+            int node = Stack.top();
+            Stack.pop();
+            if (nodes[node] == 2) continue;
+            nodes[node] = 2;
+            for (int j = matrix_size-1; j>=0; j--) {
+                if (matrix[node][j] == 1 && nodes[j]!=2) {
+                    Stack.push(j);
+                    nodes[j] = 1;
+                }
+            }
+            cout << node+1 << " ";
+        }
+        cout << endl;
+        cout << "----------DFS----------------\n";
+        reloadNodes();
+    }
+
+    void Graph::reloadNodes() {
+        for (int i = 0; i<matrix_size;i++) {
+            nodes[i] = 0;
+        }
+
+    }
+
+    void Graph::BFS() {
+        cout << "----------BFS----------------\n";
+        Queue.push(0);
+        while (!Queue.empty()) {
+            int node = Queue.front();
+            Queue.pop();
+            nodes[node] = 2;
+            for (int j = 0; j<matrix_size;j++) {
+                if (matrix[node][j] == 1 && nodes[j]==0) {
+                    Queue.push(j);
+                    nodes[j] = 1;
+                }
+            }
+            cout << node+1 << " ";
+        }
+        cout << endl;
+        cout << "----------BFS----------------\n";
+        reloadNodes();
+    }
+
+    void Graph::printGraph() {
+        cout << "----------GRAPH----------------\n";
+        for (int i = 0; i<matrix_size; i++) {
+            for (int j = 0; j<matrix_size; j++) {
+                if (matrix[i][j] == 1) {
+                    cout << i+1 << " --> " << j+1 << std::endl;
+                }
+            }
+        }
+    cout << "----------GRAPH----------------\n";
     }
 
 } // KVA

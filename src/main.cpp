@@ -12,7 +12,7 @@ using namespace KVA;
 void ReadGraphFromFile(any &param) {
     auto *graph = std::any_cast<Graph *>(param);
     int x, y;
-    std::ifstream in("graph.txt");
+    std::ifstream in("../graph.txt");
     if (!in) {
         std::cout << "Cannot open file\n";
         return;
@@ -28,6 +28,9 @@ void ReadGraphFromFile(any &param) {
 void print(any &param) {
     auto *graph = std::any_cast<Graph *>(param);
     graph->ShowMatrix();
+    graph->BFS();
+    graph->DFS();
+    graph->printGraph();
 }
 
 string MyException::file_name("test.txt");
