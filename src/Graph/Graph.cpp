@@ -10,6 +10,7 @@ namespace KVA {
     Graph::Graph() {
         this->matrix_size = 7;
         nodes = new int[matrix_size];
+        degree = new int[matrix_size];
         for (int i = 0; i < this->matrix_size; i++) {
             nodes[i] = 0;
             for (int j = 0; j < this->matrix_size; j++) {
@@ -17,17 +18,20 @@ namespace KVA {
                 this->matrix[j][i] = this->matrix[i][j];
             }
         }
+        updateDegree();
     }
 
     Graph::Graph(int _n) {
         this->matrix_size = _n;
         nodes = new int[matrix_size];
+        degree = new int[matrix_size];
         for (int i = 0; i < this->matrix_size; i++) {
             for (int j = 0; j < this->matrix_size; j++) {
                 this->matrix[i][j] = 0;
                 this->matrix[j][i] = this->matrix[i][j];
             }
         }
+        updateDegree();
     }
 
     int &Graph::operator()(int _i, int _j) {
@@ -70,6 +74,7 @@ namespace KVA {
     }
 
     void Graph::reloadNodes() {
+        nodes = new int[matrix_size];
         for (int i = 0; i < matrix_size; i++) {
             nodes[i] = 0;
         }
@@ -118,6 +123,7 @@ namespace KVA {
                 }
             }
         }
+        updateDegree();
     }
 
     void Graph::deleteVertex(int _number) {
@@ -129,18 +135,41 @@ namespace KVA {
                 }
             }
         }
-        for (int j = _number + 1; j <matrix_size;j++) {
-            for (int z = 0; z< matrix_size;z++) {
-                matrix[j-1][z] = matrix[j][z];
+        for (int j = _number + 1; j < matrix_size; j++) {
+            for (int z = 0; z < matrix_size; z++) {
+                matrix[j - 1][z] = matrix[j][z];
             }
         }
-        for (int i = 0; i<matrix_size;i++) {
-            for (int j = _number+1 ; j <matrix_size;j++) {
-                matrix[i][j-1] = matrix[i][j];
+        for (int i = 0; i < matrix_size; i++) {
+            for (int j = _number + 1; j < matrix_size; j++) {
+                matrix[i][j - 1] = matrix[i][j];
             }
         }
 
         setMatrix(matrix_size - 1);
+        updateDegree();
+    }
+
+    void Graph::updateDegree() {
+        for (int i = 0; i< matrix_size;i++) {
+            degree[i] = 0;
+        }
+        for (int i = 0; i < matrix_size; i++) {
+            for (int j = 0; j < matrix_size; j++) {
+                if (matrix[i][j] != 0) {
+                    degree[i]++;
+                }
+            }
+        }
+
+    }
+
+    int Graph::getSumDegree() {
+        int sum = 0;
+        for (int i = 0; i<matrix_size;i++) {
+            sum+=degree[i];
+        }
+        return sum;
     }
 
 } // KVA
