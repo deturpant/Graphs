@@ -28,8 +28,12 @@ void ReadGraphFromFile(any &param) {
 void print(any &param) {
     auto *graph = std::any_cast<Graph *>(param);
     graph->ShowMatrix();
-    graph->BFS();
-    graph->DFS();
+    graph->printGraph();
+    int *arr = new int[2];
+    arr[0] = 3;
+    arr[1] = 4;
+    graph->addVertex(2, arr);
+    graph->ShowMatrix();
     graph->printGraph();
 }
 

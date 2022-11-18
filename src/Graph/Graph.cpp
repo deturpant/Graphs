@@ -51,18 +51,18 @@ namespace KVA {
     void Graph::DFS() {
         cout << "----------DFS----------------\n";
         Stack.push(0);
-        while(!Stack.empty()) {
+        while (!Stack.empty()) {
             int node = Stack.top();
             Stack.pop();
             if (nodes[node] == 2) continue;
             nodes[node] = 2;
-            for (int j = matrix_size-1; j>=0; j--) {
-                if (matrix[node][j] == 1 && nodes[j]!=2) {
+            for (int j = matrix_size - 1; j >= 0; j--) {
+                if (matrix[node][j] == 1 && nodes[j] != 2) {
                     Stack.push(j);
                     nodes[j] = 1;
                 }
             }
-            cout << node+1 << " ";
+            cout << node + 1 << " ";
         }
         cout << endl;
         cout << "----------DFS----------------\n";
@@ -70,7 +70,7 @@ namespace KVA {
     }
 
     void Graph::reloadNodes() {
-        for (int i = 0; i<matrix_size;i++) {
+        for (int i = 0; i < matrix_size; i++) {
             nodes[i] = 0;
         }
 
@@ -83,13 +83,13 @@ namespace KVA {
             int node = Queue.front();
             Queue.pop();
             nodes[node] = 2;
-            for (int j = 0; j<matrix_size;j++) {
-                if (matrix[node][j] == 1 && nodes[j]==0) {
+            for (int j = 0; j < matrix_size; j++) {
+                if (matrix[node][j] == 1 && nodes[j] == 0) {
                     Queue.push(j);
                     nodes[j] = 1;
                 }
             }
-            cout << node+1 << " ";
+            cout << node + 1 << " ";
         }
         cout << endl;
         cout << "----------BFS----------------\n";
@@ -98,14 +98,26 @@ namespace KVA {
 
     void Graph::printGraph() {
         cout << "----------GRAPH----------------\n";
-        for (int i = 0; i<matrix_size; i++) {
-            for (int j = 0; j<matrix_size; j++) {
+        for (int i = 0; i < matrix_size; i++) {
+            for (int j = 0; j < matrix_size; j++) {
                 if (matrix[i][j] == 1) {
-                    cout << i+1 << " --> " << j+1 << std::endl;
+                    cout << i + 1 << " --> " << j + 1 << std::endl;
                 }
             }
         }
-    cout << "----------GRAPH----------------\n";
+        cout << "----------GRAPH----------------\n";
+    }
+
+    void Graph::addVertex(int _countSV, int *arrVert) {
+        setMatrix(matrix_size + 1);
+        for (int i = 0; i<matrix_size-1;i++) {
+            for (int z = 0; z<_countSV;z++) {
+                if (arrVert[z] == i) {
+                    matrix[i][matrix_size-1] = 1;
+                    matrix[matrix_size-1][i] = 1;
+                }
+            }
+        }
     }
 
 } // KVA

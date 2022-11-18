@@ -6,6 +6,7 @@
 #define GRAPHS_GRAPH_H
 #include <stack>
 #include <queue>
+#define MAX_SIZE 100
 using namespace std;
 namespace KVA {
 
@@ -16,7 +17,7 @@ namespace KVA {
         int *nodes;
         void reloadNodes();
     public:
-        int matrix[7][7];
+        int matrix[MAX_SIZE][MAX_SIZE];
         int matrix_size;
         Graph();
         Graph(int _n);
@@ -26,6 +27,7 @@ namespace KVA {
         void ShowMatrix(); // распечатать матрицу
         void DFS(); // обход в глубину
         void BFS(); //обход в ширину
+        void addVertex(int _countSV, int *arrVert); // добавление вершины
     };
 
 } // KVA
