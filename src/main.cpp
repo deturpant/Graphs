@@ -35,6 +35,9 @@ void print(any &param) {
     graph->addVertex(2, arr);
     graph->ShowMatrix();
     graph->printGraph();
+    graph->deleteVertex(2);
+    graph->ShowMatrix();
+    graph->printGraph();
 }
 
 string MyException::file_name("test.txt");

@@ -28,6 +28,7 @@ namespace KVA {
         void DFS(); // обход в глубину
         void BFS(); //обход в ширину
         void addVertex(int _countSV, int *arrVert); // добавление вершины
+        void deleteVertex(int _number);
     };
 
 } // KVA
