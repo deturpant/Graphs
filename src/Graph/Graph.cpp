@@ -19,6 +19,7 @@ namespace KVA {
             }
         }
         updateDegree();
+        updateCountEdge();
     }
 
     Graph::Graph(int _n) {
@@ -32,10 +33,7 @@ namespace KVA {
             }
         }
         updateDegree();
-    }
-
-    int &Graph::operator()(int _i, int _j) {
-        return this->matrix[_i][_j];
+        updateCountEdge();
     }
 
     void Graph::setMatrix(int _n) {
@@ -124,6 +122,7 @@ namespace KVA {
             }
         }
         updateDegree();
+        updateCountEdge();
     }
 
     void Graph::deleteVertex(int _number) {
@@ -148,10 +147,11 @@ namespace KVA {
 
         setMatrix(matrix_size - 1);
         updateDegree();
+        updateCountEdge();
     }
 
     void Graph::updateDegree() {
-        for (int i = 0; i< matrix_size;i++) {
+        for (int i = 0; i < matrix_size; i++) {
             degree[i] = 0;
         }
         for (int i = 0; i < matrix_size; i++) {
@@ -166,10 +166,26 @@ namespace KVA {
 
     int Graph::getSumDegree() {
         int sum = 0;
-        for (int i = 0; i<matrix_size;i++) {
-            sum+=degree[i];
+        for (int i = 0; i < matrix_size; i++) {
+            sum += degree[i];
         }
         return sum;
+    }
+
+    void Graph::updateCountEdge() {
+        countEdge = 0;
+        for (int i = 0; i < matrix_size; i++) {
+            for (int j = 0; j < matrix_size; j++) {
+                if (matrix[i][j] == 1) {
+                    countEdge++;
+                }
+            }
+        }
+        countEdge /= 2;
+    }
+
+    int Graph::getCountEdge() {
+        return countEdge;
     }
 
 } // KVA

@@ -38,6 +38,8 @@ void print(any &param) {
     graph->deleteVertex(2);
     graph->ShowMatrix();
     graph->printGraph();
+    cout << graph->getSumDegree() << endl;
+    cout << graph->getCountEdge();
 }
 
 string MyException::file_name("test.txt");

@@ -16,13 +16,15 @@ namespace KVA {
         queue<int> Queue;
         int *nodes;
         int *degree;
+        int countEdge = 0;
         void reloadNodes();
+        void updateCountEdge();
+        void updateDegree(); // обновить степени вершин
     public:
         int matrix[MAX_SIZE][MAX_SIZE];
         int matrix_size;
         Graph();
         Graph(int _n);
-        int &operator() (int _i, int _j);
         void setMatrix(int _n); // установить размер
         void printGraph(); // распечатать ребра
         void ShowMatrix(); // распечатать матрицу
@@ -30,8 +32,8 @@ namespace KVA {
         void BFS(); //обход в ширину
         void addVertex(int _countSV, int *arrVert); // добавление вершины
         void deleteVertex(int _number); // удаление вершины по номеру
-        void updateDegree(); // обновить степени вершин
         int getSumDegree(); // получить сумму степеней вершин
+        int getCountEdge();
     };
 
 } // KVA
