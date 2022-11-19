@@ -5,20 +5,22 @@
 #include "Menu/MyMenu.h"
 #include "Menu/MenuItem.h"
 
-#define GRAPH_SIZE 5
-#define SIZE_MENU 10
+#define SIZE_MENU 11
 using namespace KVA;
 
 void ReadGraphFromFile(any &param) {
     auto *graph = std::any_cast<Graph *>(param);
     int x, y;
+    cout << "Введите кол-во вершин в графе -->";
+    int counter;
+    cin >> counter;
     std::ifstream in("../graph.txt");
     if (!in) {
         std::cout << "Cannot open file\n";
         return;
     }
-    for (y = 0; y < GRAPH_SIZE; y++) {
-        for (x = 0; x < GRAPH_SIZE; x++) {
+    for (y = 0; y < counter; y++) {
+        for (x = 0; x < counter; x++) {
             in >> graph->matrix[x][y];
         }
     }
@@ -100,6 +102,7 @@ int main() {
       MenuItem("Вывод возможных перемещений между вершинами", printG),
       MenuItem("Вывести количество ребёр в графе", printCountEdge),
       MenuItem("Вывести сумму степеней вершин в графе", printSumDegree),
+      MenuItem("Загрузить граф из файла", ReadGraphFromFile),
       MenuItem("Выход из программы", exit)
     };
     MyMenu menu("Graphs", items, SIZE_MENU);
