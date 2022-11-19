@@ -6,7 +6,7 @@
 #include "Menu/MenuItem.h"
 
 #define GRAPH_SIZE 5
-#define SIZE_MENU 2
+#define SIZE_MENU 10
 using namespace KVA;
 
 void ReadGraphFromFile(any &param) {
@@ -34,10 +34,15 @@ void addVert(any &param) {
     for (int i = 0; i< counter;i++) {
         cout << "Введите вершину №" << i+1 << " -->";
         cin >> temp;
-        arr[i] = temp;
+        arr[i] = temp-1;
     }
     graph->addVertex(counter, arr);
     cout << "\nВершина и соответствующие связи установлены!\n";
+}
+void createGraph(any &param) {
+    auto *graph = std::any_cast<Graph*>(param);
+    //Graph *graph = new Graph(1);
+    cout << "Граф успешно создан. Создана вершина №1.\n";
 }
 void deleteVert(any &param) {
     auto *graph = std::any_cast<Graph *>(param);
@@ -78,28 +83,25 @@ void printSumDegree(any &param) {
     cout << "Запущена функция вывода суммы степеней вершин...\n";
     cout << "Результат ==> " << graph->getSumDegree();
 }
-void print(any &param) {
-    auto *graph = std::any_cast<Graph *>(param);
-    graph->ShowMatrix();
-    graph->printGraph();
-    int *arr = new int[2];
-    arr[0] = 3;
-    arr[1] = 4;
-    graph->addVertex(2, arr);
-    graph->ShowMatrix();
-    graph->printGraph();
-    graph->deleteVertex(2);
-    graph->ShowMatrix();
-    graph->printGraph();
-    cout << graph->getSumDegree() << endl;
-    cout << graph->getCountEdge();
+void exit(any &param) {
+    exit(0);
 }
-
 string MyException::file_name("test.txt");
 
 int main() {
-    Graph *graph = new Graph(GRAPH_SIZE);
-    MenuItem items[SIZE_MENU] = {MenuItem("Show Graph", print), MenuItem("Load Graph from file", ReadGraphFromFile)};
+    Graph *graph = new Graph(1);
+    MenuItem items[SIZE_MENU] = {
+            MenuItem("Создать граф", createGraph),
+      MenuItem("Добавить вершину", addVert),
+      MenuItem("Удалить вершину", deleteVert),
+      MenuItem("Обход графа в ширину", printBFS),
+      MenuItem("Обход графа в глубину", printDFS),
+      MenuItem("Вывести матрицу смежности", printMatrix),
+      MenuItem("Вывод возможных перемещений между вершинами", printG),
+      MenuItem("Вывести количество ребёр в графе", printCountEdge),
+      MenuItem("Вывести сумму степеней вершин в графе", printSumDegree),
+      MenuItem("Выход из программы", exit)
+    };
     MyMenu menu("Graphs", items, SIZE_MENU);
     any param = graph;
     while (true) {

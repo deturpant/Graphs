@@ -114,11 +114,11 @@ namespace KVA {
 
     void Graph::addVertex(int _countSV, int *arrVert) {
         setMatrix(matrix_size + 1);
-        for (int i = 0; i < matrix_size - 1; i++) {
+        for (int i = 0; i < matrix_size; i++) {
             for (int z = 0; z < _countSV; z++) {
                 if (arrVert[z] == i) {
-                    matrix[i][matrix_size - 1] = 1;
-                    matrix[matrix_size - 1][i] = 1;
+                    matrix[i][matrix_size-1] = 1;
+                    matrix[matrix_size-1][i] = 1;
                 }
             }
         }
