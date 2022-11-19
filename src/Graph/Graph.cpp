@@ -38,6 +38,9 @@ namespace KVA {
 
     void Graph::setMatrix(int _n) {
         this->matrix_size = _n;
+        updateDegree();
+        updateCountEdge();
+
     }
 
     void Graph::ShowMatrix() {
