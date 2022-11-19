@@ -24,6 +24,7 @@ void ReadGraphFromFile(any &param) {
             in >> graph->matrix[x][y];
         }
     }
+    graph->setMatrix(counter);
     in.close();
 }
 void addVert(any &param) {
