@@ -192,4 +192,22 @@ namespace KVA {
         return countEdge;
     }
 
+    void Graph::addEdge(int from, int to) {
+        matrix[from-1][to-1] = 1;
+        matrix[to-1][from-1] = 1;
+        updateCountEdge();
+        updateDegree();
+        reloadNodes();
+
+    }
+
+    void Graph::deleteEdge(int from, int to) {
+        matrix[from-1][to-1] = 0;
+        matrix[to-1][from-1] = 0;
+        updateDegree();
+        updateCountEdge();
+        reloadNodes();
+
+    }
+
 } // KVA

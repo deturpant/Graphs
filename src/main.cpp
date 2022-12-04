@@ -6,14 +6,52 @@
 #include "Menu/MyMenu.h"
 #include "Menu/MenuItem.h"
 
-#define SIZE_MENU 10
+#define SIZE_MENU 12
 #define LOAD_GRAPH auto *graph = any_cast<Graph*>(params[0]);
 #define LOAD_OUTPUT_FILE auto out = any_cast<string>(params[1]);
 #define LOAD_DATA_FILE auto fn = any_cast<string>(params[2]);
 
 using namespace KVA;
 
+void addEdge(vector<any>params) {
+    LOAD_GRAPH;
+    int _f;
+    int _to;
+    graph->ShowMatrix();
+    cout << "Пожалуйста, введите первую вершину ребра: ";
+    cin >> _f;
+    if (_f > graph->matrix_size || _f<=0) {
+        throw MyException{"Wrong index vertex"};
+    }
+    cout << "Пожалуйста, введите вторую вершину ребра: ";
+    cin >> _to;
+    if (_to > graph->matrix_size || _to<=0) {
+        throw MyException{"Wrong index vertex"};
+    }
+    graph->addEdge(_f, _to);
+    cout << "Ребро успешно добавлено!\n";
+    graph->ShowMatrix();
+}
+void deleteEdge(vector<any> params){
+    LOAD_GRAPH;
+    int _f;
+    int _to;
+    graph->ShowMatrix();
+    cout << "Пожалуйста, введите первую вершину ребра: ";
+    cin >> _f;
+    if (_f > graph->matrix_size || _f<=0) {
+        throw MyException{"Wrong index vertex"};
+    }
+    cout << "Пожалуйста, введите вторую вершину ребра: ";
+    cin >> _to;
+    if (_to > graph->matrix_size || _to<=0) {
+        throw MyException{"Wrong index vertex"};
+    }
+    graph->deleteEdge(_f, _to);
+    cout << "Ребро успешно удалено!\n";
+    graph->ShowMatrix();
 
+}
 void ReadGraphFromFile(vector<any> params) {
     LOAD_GRAPH
     LOAD_DATA_FILE
@@ -143,6 +181,8 @@ int main(int argc, char *argv[]) {
     MenuItem items[SIZE_MENU] = {
       MenuItem("Добавить вершину", addVert),
       MenuItem("Удалить вершину", deleteVert),
+      MenuItem("Добавить ребро", addEdge),
+      MenuItem("Удалить ребро", deleteEdge),
       MenuItem("Обход графа в ширину", printBFS),
       MenuItem("Обход графа в глубину", printDFS),
       MenuItem("Вывести матрицу смежности", printMatrix),
